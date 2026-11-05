@@ -1,28 +1,62 @@
-📖 Overview
+<div align="center">
+
+# ✈️ Airline Customer Satisfaction Predictor
+
+**Predict whether a passenger will be satisfied with their flight, and explore the data behind it.**
+
+A logistic regression model served by **FastAPI** and explored through an interactive **React** dashboard.
+
+![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?logo=scikitlearn&logoColor=white)
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)
+![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?logo=chartdotjs&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-8b5cf6)
+
+[Features](#-features) · [Architecture](#-architecture) · [Getting started](#-getting-started) · [API](#-api-reference) · [Model](#-model) · [Roadmap](#-roadmap)
+
+</div>
+
+<!-- Add a screenshot: save it as docs/dashboard.png and uncomment the line below -->
+<!-- <p align="center"><img src="docs/dashboard.png" alt="Dashboard screenshot" width="900"></p> -->
+
+---
+
+## 📖 Overview
 
 This project covers the full machine learning workflow: cleaning a customer survey dataset, training a classifier, exposing it through a REST API, and presenting the results in a modern dark purple dashboard. Enter a customer profile and get a satisfaction prediction with its probability, or filter the whole dataset and watch the charts update instantly.
 
-✨ Features
-	
-🎯 Satisfaction prediction	Enter a customer profile, flight details and 13 service ratings to get a prediction with its probability.
-📊 Interactive analytics	Filter customers by flight distance and class, and watch the KPIs and charts update instantly.
-📈 Visualizations	Flight distance vs arrival delay, satisfied customers by class, and satisfaction by gender.
-⚡ REST API	FastAPI backend with automatic request validation and Swagger UI at /docs.
-🌐 Zero-build frontend	React 18 and Chart.js loaded from a CDN in a single HTML file, with no Node.js build step.
-🏗️ Architecture
-POST /predict
-GET /data
-🖥️ React dashboard(browser)
-⚡ FastAPI
-🧠 StandardScaler +Logistic Regression
-📁 Cleaneddataframe
-🛠️ Tech stack
-Layer	Tools
-Model	Python, pandas, scikit-learn (Logistic Regression, StandardScaler)
-Backend	FastAPI, Uvicorn, Pydantic
-Frontend	React 18, Chart.js, HTML5 and CSS3
-📂 Project structure
-text
+## ✨ Features
+
+| | |
+|---|---|
+| 🎯 **Satisfaction prediction** | Enter a customer profile, flight details and 13 service ratings to get a prediction with its probability. |
+| 📊 **Interactive analytics** | Filter customers by flight distance and class, and watch the KPIs and charts update instantly. |
+| 📈 **Visualizations** | Flight distance vs arrival delay, satisfied customers by class, and satisfaction by gender. |
+| ⚡ **REST API** | FastAPI backend with automatic request validation and Swagger UI at `/docs`. |
+| 🌐 **Zero-build frontend** | React 18 and Chart.js loaded from a CDN in a single HTML file, with no Node.js build step. |
+
+## 🏗️ Architecture
+
+```mermaid
+flowchart LR
+    A["🖥️ React dashboard<br/>(browser)"] -- "POST /predict" --> B["⚡ FastAPI"]
+    A -- "GET /data" --> B
+    B --> C["🧠 StandardScaler +<br/>Logistic Regression"]
+    B --> D[("📁 Cleaned<br/>dataframe")]
+```
+
+## 🛠️ Tech stack
+
+| Layer | Tools |
+|---|---|
+| **Model** | Python, pandas, scikit-learn (Logistic Regression, StandardScaler) |
+| **Backend** | FastAPI, Uvicorn, Pydantic |
+| **Frontend** | React 18, Chart.js, HTML5 and CSS3 |
+
+## 📂 Project structure
+
+```text
 airline-satisfaction/
 ├── app/
 │   ├── airline_api.py            # FastAPI app: /predict, /data, dashboard
@@ -38,55 +72,66 @@ airline-satisfaction/
 ├── airline_model.py              # data cleaning and model training
 ├── requirements.txt
 └── README.md
+```
 
-Adjust the names above if your local structure differs.
+> Adjust the names above if your local structure differs.
 
-🚀 Getting started
+## 🚀 Getting started
 
-Prerequisites: Python 3.10 or newer and Git.
+**Prerequisites:** Python 3.10 or newer and Git.
 
-1. Clone the repository
+**1. Clone the repository**
 
-bash
+```bash
 git clone https://github.com/<your-username>/<your-repo>.git
 cd <your-repo>
+```
 
-2. Create a virtual environment and install dependencies
+**2. Create a virtual environment and install dependencies**
 
-bash
+```bash
 python -m venv venv
 venv\Scripts\activate           # Windows
 # source venv/bin/activate      # macOS / Linux
 
 pip install -r requirements.txt
+```
 
-3. Train the model
+**3. Train the model**
 
-Cleans the data, trains the model, and saves the model, scaler, column list and cleaned dataframe into models/.
+Cleans the data, trains the model, and saves the model, scaler, column list and cleaned dataframe into `models/`.
 
-bash
+```bash
 python airline_model.py
+```
 
-4. Start the server
+**4. Start the server**
 
-bash
+```bash
 uvicorn app.airline_api:app --reload
+```
 
-5. Open the app
+**5. Open the app**
 
-	URL
-📊 Dashboard	http://127.0.0.1:8000
-📚 API docs	http://127.0.0.1:8000/docs
+| | URL |
+|---|---|
+| 📊 Dashboard | http://127.0.0.1:8000 |
+| 📚 API docs | http://127.0.0.1:8000/docs |
 
-💡 The status pill in the top right of the dashboard shows API connected when everything works. If it says API offline, check that Uvicorn is running on port 8000.
+> 💡 The status pill in the top right of the dashboard shows **API connected** when everything works. If it says **API offline**, check that Uvicorn is running on port 8000.
 
-🔌 API reference
-Method	Endpoint	Description
-GET	/	Serves the dashboard
-GET	/data	Returns the cleaned dataset as JSON for the charts
-POST	/predict	Returns the predicted satisfaction and its probability
-<details> <summary><b>📨 Example request: <code>POST /predict</code></b></summary>
-json
+## 🔌 API reference
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/` | Serves the dashboard |
+| `GET` | `/data` | Returns the cleaned dataset as JSON for the charts |
+| `POST` | `/predict` | Returns the predicted satisfaction and its probability |
+
+<details>
+<summary><b>📨 Example request: <code>POST /predict</code></b></summary>
+
+```json
 {
   "Gender": 1,
   "Customer_Type": 1,
@@ -112,49 +157,70 @@ json
   "Class_eco": 0,
   "Class_eco_plus": 0
 }
-</details> <details> <summary><b>📬 Example response</b></summary>
-json
+```
+
+</details>
+
+<details>
+<summary><b>📬 Example response</b></summary>
+
+```json
 {
   "Prediction": 1,
   "Probability": 0.87
 }
+```
 
-Prediction is 1 for satisfied and 0 for neutral or dissatisfied.
+`Prediction` is `1` for **satisfied** and `0` for **neutral or dissatisfied**.
 
-</details> <details> <summary><b>🔢 Field encoding</b></summary>
-Field	Encoding
-Gender	1 male, 0 female
-Customer_Type	1 loyal, 0 disloyal
-Type_of_Travel	1 business, 0 personal
-Class_*	one-hot: exactly one of Class_business, Class_eco, Class_eco_plus is 1
-Service ratings	integers from 1 (poor) to 5 (excellent)
 </details>
-🧠 Model
-	
-Algorithm	Logistic Regression
-Preprocessing	Missing arrival delays filled with the mean, rating values of 0 removed, categorical features encoded, class one-hot encoded, features standardized with StandardScaler
-Train / test split	80% / 20% (random_state=42)
-Test accuracy	XX% <!-- replace with your real result, for example 87.4% -->
-📊 Dataset
 
-The Airline Passenger Satisfaction dataset from Kaggle. Each row is a customer survey with passenger details, flight information, service ratings from 1 to 5, and the final satisfaction label.
+<details>
+<summary><b>🔢 Field encoding</b></summary>
 
-🗺️ Roadmap
- Benchmark against other classifiers (Random Forest, Gradient Boosting, XGBoost)
- Show feature importance in the dashboard
- Containerize with Docker
- Deploy to a cloud provider
-🤝 Contributing
+| Field | Encoding |
+|---|---|
+| `Gender` | `1` male, `0` female |
+| `Customer_Type` | `1` loyal, `0` disloyal |
+| `Type_of_Travel` | `1` business, `0` personal |
+| `Class_*` | one-hot: exactly one of `Class_business`, `Class_eco`, `Class_eco_plus` is `1` |
+| Service ratings | integers from `1` (poor) to `5` (excellent) |
+
+</details>
+
+## 🧠 Model
+
+| | |
+|---|---|
+| **Algorithm** | Logistic Regression |
+| **Preprocessing** | Missing arrival delays filled with the mean, rating values of 0 removed, categorical features encoded, class one-hot encoded, features standardized with `StandardScaler` |
+| **Train / test split** | 80% / 20% (`random_state=42`) |
+| **Test accuracy** | **XX%** <!-- replace with your real result, for example 87.4% --> |
+
+## 📊 Dataset
+
+The [Airline Passenger Satisfaction](https://www.kaggle.com/) dataset from Kaggle. Each row is a customer survey with passenger details, flight information, service ratings from 1 to 5, and the final satisfaction label.
+
+## 🗺️ Roadmap
+
+- [ ] Benchmark against other classifiers (Random Forest, Gradient Boosting, XGBoost)
+- [ ] Show feature importance in the dashboard
+- [ ] Containerize with Docker
+- [ ] Deploy to a cloud provider
+
+## 🤝 Contributing
 
 Suggestions and pull requests are welcome. Open an issue first to discuss any major change.
 
-📝 License
+## 📝 License
 
-Distributed under the MIT License. See LICENSE for details.
+Distributed under the MIT License. See [`LICENSE`](LICENSE) for details.
+
+---
 
 <div align="center">
 
-Built by <your-name> · GitHub · LinkedIn
+Built by **<your-name>** · [GitHub](https://github.com/<your-username>) · [LinkedIn](https://www.linkedin.com/in/<your-handle>)
 
 ⭐ If you found this project useful, consider giving it a star.
 
