@@ -23,7 +23,6 @@ An end-to-end machine learning project that predicts whether an airline passenge
 
 ## 📂 Project Structure
 
-```text
 airline-satisfaction/
 ├── app/
 │   ├── airline_api.py           # FastAPI app (/predict, /data, dashboard view)
