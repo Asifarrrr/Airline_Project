@@ -23,6 +23,7 @@ An end-to-end machine learning project that predicts whether an airline passenge
 
 ## 📂 Project Structure
 
+```text
 airline-satisfaction/
 ├── app/
 │   ├── airline_api.py           # FastAPI app (/predict, /data, dashboard view)
@@ -41,7 +42,7 @@ airline-satisfaction/
 💡 Note: Adjust the file paths above if your local repository structure differs.🚀 Getting Started & Setup CommandsTo get your application up and running locally from start to finish, run the following complete sequence of terminal commands:Bash# 1. Clone the repository and enter the directory
 git clone [https://github.com/](https://github.com/)<your-username>/<your-repo>.git
 cd <your-repo>
-
+```
 # 2. Create and activate a virtual environment
 python -m venv venv
 venv\Scripts\activate           # Windows
