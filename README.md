@@ -88,7 +88,3 @@ I used the Airline Passenger Satisfaction dataset from Kaggle. Each row is a cus
 - Try other models like Random Forest
 - Show which features matter the most
 - Put the project online
-
-## Author
-
-<your-name> · [GitHub](https://github.com/<your-username>)
